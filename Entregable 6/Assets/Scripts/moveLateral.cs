@@ -16,7 +16,10 @@ public class moveLateral : MonoBehaviour
 
     void Update()
     {
-        if (!PlayerControllerScript.gameOver)
+        if (PlayerControllerScript.gameOver)
+        {
+        }
+        else
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }

@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRigidbody;
     public float jumpForce = 10;
-    public float gravityModifier = 1f;
+    public float gravityModifier = 2f;
     public bool gameOver;
     private AudioSource playeraudioSource;
     private AudioSource cameraAudioSource;
@@ -28,20 +30,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         {
             playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             playeraudioSource.PlayOneShot(jumpClip, 1f);
         }
-
+      
         if (transform.position.y <= -0.5f)
         {
-            Destroy(gameObject);
+            playeraudioSource.PlayOneShot(explosionClip, 1f);
             gameOver = true;
             Debug.Log(message: "GAME OVER");
             explosionParticleSystem.Play();
             cameraAudioSource.volume = 0.05f;
-            playeraudioSource.PlayOneShot(explosionClip);
+            Destroy(gameObject);
         }
 
         if (transform.position.y >= limY)

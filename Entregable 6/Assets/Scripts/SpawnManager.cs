@@ -29,9 +29,10 @@ public class SpawnManager : MonoBehaviour
     {
         if (!PlayerControllerScript.gameOver)
         {
-            randomY = Random.Range(0, limY);
-            spawnPosL = new Vector3(-20, randomY, 0);
+            randomY = Random.Range(0, limY); 
             spawnPosR = new Vector3(20, randomY, 0);
+            spawnPosL = new Vector3(-20, randomY, 0);
+           
 
             int randNum = Random.Range(0, 2);
 
